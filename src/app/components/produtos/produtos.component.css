@@ -1,0 +1,12 @@
+.margem {
+    margin: 100px;
+    width: 100%;
+}
+
+h2 {
+    display: inline;
+}
+
+.margem-right {
+    margin-right: 1200px;
+}

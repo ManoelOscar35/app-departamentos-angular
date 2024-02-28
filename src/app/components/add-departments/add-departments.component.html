@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="submit()"   class="m-3">
+    <div class="form-group">
+        <label for="nome" class="mb-1">Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nome"
+          id="nome"
+          formControlName="nome"
+          autocomplete="off"
+        />
+    </div>
+    <button class="btn btn-primary mt-2" type="submit">+ Adicionar</button>
+</form>

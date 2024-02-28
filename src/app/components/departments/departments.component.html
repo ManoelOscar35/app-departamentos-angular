@@ -1,0 +1,34 @@
+<main>
+    <div class="margem">
+        <div class="card" style="width: 20rem; height: 8rem;" [ngStyle]="{'background-color': this.departments.length > 0 ? 'green' : 'red'}">
+            <div class="card-body">
+              <h2>Departamentos: {{this.departments.length}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="margem">
+        <h2 class="margem-right">Departamentos:</h2> 
+        <button type="button" class="btn btn-primary" (click)="openDialog()">+ Adicionar</button>
+        <br>
+        <br>
+        <table class="table" style="width: 75%">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let d of departments">
+                <th scope="row">{{d.id}}</th>
+                <td>{{d.name}}</td>
+                <td>
+                    <button type="button" class="btn btn-secondary me-2" (click)="openDialogEdit(d.name, d.id)">Editar</button>
+                    <button type="button" class="btn btn-danger" (click)="delete(d.id)">Deletar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

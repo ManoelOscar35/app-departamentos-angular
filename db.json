@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "name": "Macarrão",
+      "price": 5,
+      "qtde": 50,
+      "id": 1
+    },
+    {
+      "name": "Feijão",
+      "price": 7.5,
+      "qtde": 100,
+      "id": 2
+    },
+    {
+      "name": "Coca-cola",
+      "price": 8,
+      "qtde": 180,
+      "id": 3
+    },
+    {
+      "name": "Fanta",
+      "price": 6.5,
+      "qtde": 100,
+      "id": 4
+    }
+  ],
+  "departments": [
+    {
+      "name": "Alimentos",
+      "id": 1
+    },
+    {
+      "name": "Bebidas sem alcool",
+      "id": 2
+    },
+    {
+      "name": "Cama, Mesa e Banho",
+      "id": 3
+    },
+    {
+      "name": "Bebidas com alcool",
+      "id": 4
+    }
+  ]
+}
