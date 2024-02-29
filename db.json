@@ -31,16 +31,12 @@
       "id": 1
     },
     {
-      "name": "Bebidas sem alcool",
+      "name": "Bebidas",
       "id": 2
     },
     {
-      "name": "Cama, Mesa e Banho",
+      "name": "Cama, mesa e banho",
       "id": 3
-    },
-    {
-      "name": "Bebidas com alcool",
-      "id": 4
     }
   ]
 }

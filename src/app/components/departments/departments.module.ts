@@ -8,6 +8,7 @@ import { AddDepartmentsComponent } from '../add-departments/add-departments.comp
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditDepartmentsComponent } from '../edit-departments/edit-departments.component';
 
+
 @NgModule({
   declarations: [
     DepartmentsComponent, 

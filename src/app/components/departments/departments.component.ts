@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { retry } from 'rxjs';
 import { Department } from 'src/app/model/department';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { AddDepartmentsComponent } from '../add-departments/add-departments.component';
 import { EditDepartmentsComponent } from '../edit-departments/edit-departments.component';
 import { StoreService } from 'src/app/shared/store.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-departments',
@@ -19,7 +19,8 @@ export class DepartmentsComponent implements OnInit {
   constructor(
     private departmentsService: DepartmentsService,
     private dialog: MatDialog,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit() {
@@ -28,19 +29,16 @@ export class DepartmentsComponent implements OnInit {
 
   getDepartments() {
     this.departmentsService.get()
-      .pipe(
-        retry(10)
-      )
+    this.departmentsService.data$
       .subscribe({
         next: (departments: Department[]) => {
+          console.log(departments)
           this.departments = departments;
-          console.log(this.departments)
         },
         error: (err: Error) => console.error("Houve um erro: ",err),
         complete: () => console.log("O envio da stream de dados foi finalizada!")      
     });
   }
-
 
   openDialog() {
     this.dialog.open(AddDepartmentsComponent, {
@@ -69,9 +67,12 @@ export class DepartmentsComponent implements OnInit {
     this.departmentsService.delete(id).subscribe({
       next: (res: any) => {
         console.log("O dado foi excluído com sucesso!")
+        this.utilsService.showSuccess('Departamento excluído com sucesso!');
       },
-      error: (err) => console.error(err),
+      error: (err) => this.utilsService.showError('Houve um Erro ao excluir o departamento!'),
       complete: () => console.log("O envio da stream de dados foi finalizada!")  
     });
   }
+
+  
 }
