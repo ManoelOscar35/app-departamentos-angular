@@ -3,6 +3,12 @@
     width: 100%;
 }
 
+.margem2 {
+    margin: 100px;
+    margin-top: -50px;
+    width: 100%;
+}
+
 h2 {
     display: inline;
 }
@@ -13,4 +19,15 @@ h2 {
 
 .position {
     margin-left: 1300px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px;
+}
+
+.formContainer {
+    margin-left: 5px;
 }
