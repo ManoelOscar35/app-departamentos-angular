@@ -37,6 +37,14 @@
     {
       "name": "Cama, mesa e banho",
       "id": 3
+    },
+    {
+      "name": "Frios",
+      "id": 4
+    },
+    {
+      "name": "Horti Fruti",
+      "id": 5
     }
   ]
 }

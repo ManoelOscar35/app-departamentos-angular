@@ -6,6 +6,7 @@ import { AddDepartmentsComponent } from '../add-departments/add-departments.comp
 import { EditDepartmentsComponent } from '../edit-departments/edit-departments.component';
 import { StoreService } from 'src/app/shared/store.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { Observable, Subject, catchError, debounceTime, distinctUntilChanged, from, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-departments',
@@ -15,6 +16,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class DepartmentsComponent implements OnInit {
 
   departments: Department[] = [];
+  private subjectPesquisa: Subject<string> = new Subject<string>()
 
   constructor(
     private departmentsService: DepartmentsService,
@@ -25,6 +27,28 @@ export class DepartmentsComponent implements OnInit {
 
   ngOnInit() {
     this.getDepartments();
+    this.subjectPesquisa
+      .pipe(
+        debounceTime(1000), //executa a ação do switchMap após 1 segundo
+        distinctUntilChanged(), //preveni que ocorra duas pesquisas idênticas
+        switchMap((termoDaBusca: string) => {
+          if (termoDaBusca.trim() === '') {
+            return this.departmentsService.data$
+          }
+          return this.departmentsService.pesquisaDepartamentos(termoDaBusca)
+        }),
+        catchError((err: any) => {
+          this.utilsService.showError('Houve um erro ao recarregar o(s) departamento(s)!');
+          return of<Department[]>([]);
+        })
+      )
+      .subscribe({
+        next: (departments: Department[]) => {
+          console.log(departments)
+          this.departments = departments
+        } 
+      })
+      
   }
 
   getDepartments() {
@@ -38,6 +62,10 @@ export class DepartmentsComponent implements OnInit {
         error: (err: Error) => console.error("Houve um erro: ",err),
         complete: () => console.log("O envio da stream de dados foi finalizada!")      
     });
+  }
+
+  public pesquisa(termoDaBusca: string): void {
+    this.subjectPesquisa.next(termoDaBusca)
   }
 
   openDialog() {

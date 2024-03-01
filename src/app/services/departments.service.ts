@@ -67,4 +67,11 @@ export class DepartmentsService {
       })
     )
   }
+
+  public pesquisaDepartamentos(termo: string): Observable<Department[]> {
+    return this.http.get<Department[]>(`${this.url}?name_like=${termo}`)
+    .pipe(
+      retry(10) //numero de tentativas que vai conectar com o servidor
+    )
+}
 }
