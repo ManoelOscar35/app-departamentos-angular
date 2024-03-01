@@ -14,7 +14,7 @@ import { Subject, catchError, debounceTime, distinctUntilChanged, of, switchMap 
   styleUrls: ['./departments.component.css']
 })
 export class DepartmentsComponent implements OnInit {
-
+  arr: Department[] = [];
   departments: Department[] = [];
   private subjectPesquisa: Subject<string> = new Subject<string>()
 
@@ -57,6 +57,7 @@ export class DepartmentsComponent implements OnInit {
       .subscribe({
         next: (departments: Department[]) => {
           console.log(departments)
+          this.arr = departments;
           this.departments = departments;
         },
         error: (err: Error) => console.error("Houve um erro: ",err),
@@ -69,6 +70,9 @@ export class DepartmentsComponent implements OnInit {
   }
 
   paginarArray(paginaAtual: number, itensPorPagina: number, array = this.departments) {
+    if(paginaAtual > 1) {
+      array = this.arr;
+    }
     console.log(array)
     // Calcular os índices de início e fim da página atual
     const indiceInicio = (paginaAtual - 1) * itensPorPagina;
