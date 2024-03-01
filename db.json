@@ -35,16 +35,20 @@
       "id": 2
     },
     {
-      "name": "Cama, mesa e banho",
+      "name": "Horti Fruit",
       "id": 3
     },
     {
-      "name": "Frios",
+      "name": "Cama, mesa e banho",
       "id": 4
     },
     {
-      "name": "Horti Fruti",
+      "name": "Frios",
       "id": 5
+    },
+    {
+      "name": "Bebidas com alcool",
+      "id": 6
     }
   ]
 }

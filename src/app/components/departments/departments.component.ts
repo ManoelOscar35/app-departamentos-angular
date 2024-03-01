@@ -6,7 +6,7 @@ import { AddDepartmentsComponent } from '../add-departments/add-departments.comp
 import { EditDepartmentsComponent } from '../edit-departments/edit-departments.component';
 import { StoreService } from 'src/app/shared/store.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { Observable, Subject, catchError, debounceTime, distinctUntilChanged, from, of, switchMap } from 'rxjs';
+import { Subject, catchError, debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-departments',
@@ -66,6 +66,19 @@ export class DepartmentsComponent implements OnInit {
 
   public pesquisa(termoDaBusca: string): void {
     this.subjectPesquisa.next(termoDaBusca)
+  }
+
+  paginarArray(paginaAtual: number, itensPorPagina: number, array = this.departments) {
+    console.log(array)
+    // Calcular os índices de início e fim da página atual
+    const indiceInicio = (paginaAtual - 1) * itensPorPagina;
+    const indiceFim = indiceInicio + itensPorPagina;
+  
+    // Obter os itens da página atual usando slice()
+    this.departments = array.slice(indiceInicio, indiceFim);
+
+    console.log(this.departments);
+    
   }
 
   openDialog() {
